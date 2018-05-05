@@ -83,13 +83,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.component.css" />
-    <Content Include="app\app.component.html" />
-    <Content Include="Global.asax" />
+    <Content Include="albums.html" />
+    <Content Include="matches.html" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\media_query.css" />
+    <Content Include="css\owl.carousel.css" />
+    <Content Include="css\owl.theme.default.css" />
+    <Content Include="css\style_1.css" />
+    <Content Include="images\10-1-1-875x500.jpg" />
+    <Content Include="images\32-450x260.jpg" />
+    <Content Include="images\39-324x235.jpg" />
+    <Content Include="images\abigail-keenan-65477.jpg" />
+    <Content Include="images\allef-vinicius-108153.jpg" />
+    <Content Include="images\ariel-lustre-208615.jpg" />
+    <Content Include="images\camila-cordeiro-114636.jpg" />
+    <Content Include="images\country.png" />
+    <Content Include="images\download %281%29.jpg" />
+    <Content Include="images\download %282%29.jpg" />
+    <Content Include="images\download.jpg" />
+    <Content Include="images\footer_sub_tipik.png" />
+    <Content Include="images\joe-gardner-75333.jpg" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\nathan-mcbride-229637.jpg" />
+    <Content Include="images\nick-karvounis-78711.jpg" />
+    <Content Include="images\office-768x512.jpg" />
+    <Content Include="images\person_1.jpg" />
+    <Content Include="images\photo-1449157291145-7efd050a4d0e-578x362.jpg" />
+    <Content Include="images\ryan-moreno-98837.jpg" />
+    <Content Include="images\science-578x362.jpg" />
+    <Content Include="images\seth-doyle-133175.jpg" />
+    <Content Include="images\vil-son-35490.jpg" />
+    <Content Include="images\white_logo.png" />
+    <Content Include="images\zack-minor-15104.jpg" />
+    <Content Include="champ.html" />
+    <Content Include="goals.html" />
     <Content Include="index.html" />
-    <Content Include="styles.css" />
-    <Content Include="systemjs.config.extras.js" />
-    <Content Include="systemjs.config.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\jquery.stellar.min.js" />
+    <Content Include="js\jquery.waypoints.min.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\modernizr-3.5.0.min.js" />
+    <Content Include="js\owl.carousel.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="index2.html" />
+    <Content Include="js\vue\vue.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +138,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-    <Content Include="package.json" />
-    <Content Include="tsconfig.json" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="css\style_1.css.map" />
+    <Content Include="sass\style_1.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -112,16 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="app\app.component.ts" />
-    <TypeScriptCompile Include="app\app.module.ts" />
-    <TypeScriptCompile Include="app\main.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -135,7 +169,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3276</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
