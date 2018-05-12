@@ -1,0 +1,159 @@
+﻿@{
+    string Ar = "العربية";
+    string En = "English";
+
+
+    string home = "الرئيسية";
+    string champs = "دوريات وبطولات";
+    string goals = "اهداف";
+    string gallery = "البومات";
+    string matches = "مباريات";
+
+    string aboutHead = "About";
+    string about = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+    string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+   
+    <link href="~/css/media_query.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="~/css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="~/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/owl.theme.default.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link href="~/css/style_1.css" rel="stylesheet" type="text/css" />
+    <!-- Modernizr JS -->
+    <script src="~/js/modernizr-3.5.0.min.js"></script>
+    
+
+    
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+            
+   
+<div id="navBar">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 fh5co_padding_menu">
+                    <img src="~/images/logo.png" alt="img" class="fh5co_logo_width" />
+                </div>
+                <div class="col-12 col-md-9 align-self-center fh5co_mediya_right">
+
+                    <div class="text-center d-inline-block">
+                        <a href="https://fb.com/fh5co" target="_blank" class="fh5co_display_table">
+                            <div class="fh5co_verticle_middle">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!--<div class="d-inline-block text-center"><img src="images/country.png" alt="img" class="fh5co_country_width"/></div>-->
+                    <div class="d-inline-block text-center dd_position_relative ">
+                        <select class="form-control fh5co_text_select_option">
+                            <option>@Ar </option>
+                            <option>@En </option>
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+        <div class="container padding_786">
+            <nav class="navbar navbar-toggleable-md navbar-light ">
+                <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="~/images/logo.png" alt="img" class="mobile_logo_width" /></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item @(controller=="Home" && action== "Index"?"active":"")">
+                            <a class="nav-link" href="@Url.Action("Index" , "Home")">@home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item @(controller=="Home" && action== "champs"?"active":"")">
+                            <a class="nav-link" href="@Url.Action("champs" , "Home")">@champs <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item @(controller=="Home" && action== "goals"?"active":"")">
+                            <a class="nav-link" href="@Url.Action("goals" , "Home")">@goals <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item @(controller=="Home" && action== "gallery"?"active":"")">
+                            <a class="nav-link" href="@Url.Action("gallery" , "Home")">@gallery <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item @(controller=="Home" && action== "matches"?"active":"")">
+                            <a class="nav-link" href="@Url.Action("matches" , "Home")">@matches <span class="sr-only">(current)</span></a>
+                        </li>
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+        @RenderBody()
+
+<div id="footer">
+
+
+    <div class="container-fluid fh5co_footer_bg pb-3">
+        <div class="container animate-box">
+            <div class="row">
+                <div class="col-12 spdp_right py-5">
+                    <img src="~/images/white_logo.png" alt="img" class="footer_logo" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="footer_main_title py-3"> @aboutHead</div>
+                    <div class="footer_sub_about pb-3">
+                        @about
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3 col-lg-2">
+
+                </div>
+                <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
+
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 ">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+    </div>
+</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/js/common.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<!-- Waypoints -->
+<script src="~/js/jquery.waypoints.min.js"></script>
+<!-- Main -->
+<script src="~/js/main.js"></script>
+<script src="~/js/vue/vue.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,136 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+
+}
+
+
+<div id="app">
+    <div>
+        <div class="fh5co_tags_all" style="padding: 100px;">
+            <div id="search" style="margin: 0 auto;width: 70%">
+                <div class="row mx-0 animate-box fadeInUp animated-fast" data-animate-effect="fadeInUp">
+                    <div class="col-12 text-center pb-4 pt-4">
+                        <a href="#" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
+                        <a href="#" class="btn_pagging "  >{{currentPage}}</a>
+                        <a href="#" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+                    </div>
+                </div>
+            </div>
+            <div v-for="tournament in tournaments">
+                <div>
+                    <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4"> {{tournament.name}}</div>
+                </div>
+                <table class="table" style="text-align: center">
+                    <tbody>
+                    <tr v-for="match in tournament.matches">
+                        <td>
+                            <a v-bind:href="match.link">Details</a>
+                        </td>
+                        <td>{{match.firstTeam}}</td>
+                        <td><span>{{match.firstTeamGoals}}</span>:<span>{{match.secondTeamGoals}}</span></td>
+                        <td>{{match.secondTeam}}</td>
+                        <td>{{match.date}}</td>
+                        <td><i v-if="match.isPlayed" class="fa fa-check"></i></td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+    @section scripts{
+        <script>
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    imagesUrl: '../../images/',
+
+
+                    logo: 'logo.png',
+                    facebookLink: 'https://fb.com/fh5co',
+                    lang: { ar: 'العربية', en: 'English' },
+                    items: {
+                        home: 'الرئيسية',
+                        champs: 'دوريات وبطولات',
+                        goals: 'اهداف',
+                        gallery: 'صور وفيديو',
+                        matches: 'مباريات'
+                    },
+
+                    tournaments:
+                    [
+                        {
+                            name: 'الدوري الانجليزي',
+                            matches:
+                            [
+                                {
+                                    link: 'single.html',
+                                    firstTeam: 'Egypt',
+                                    secondTeam: 'France',
+                                    firstTeamGoals: '-',
+                                    secondTeamGoals: '-',
+                                    date: '2015-11-5 09:00 PM',
+                                    isPlayed: false
+                                }, {
+                                    link: 'single.html',
+                                    firstTeam: 'Egypt',
+                                    secondTeam: 'France',
+                                    firstTeamGoals: '2',
+                                    secondTeamGoals: '9',
+                                    date: '2015-11-5 09:00 PM',
+                                    isPlayed: true
+                                }
+                            ]
+                        },
+                        {
+                            name: 'الدوري الانجليزي',
+                            matches:
+                            [
+                                {
+                                    link: 'single.html',
+                                    firstTeam: 'Egypt',
+                                    secondTeam: 'France',
+                                    firstTeamGoals: '-',
+                                    secondTeamGoals: '-',
+                                    date: '2015-11-5 09:00 PM',
+                                    isPlayed: false
+                                }, {
+                                    link: 'single.html',
+                                    firstTeam: 'Egypt',
+                                    secondTeam: 'France',
+                                    firstTeamGoals: '2',
+                                    secondTeamGoals: '9',
+                                    date: '2015-11-5 09:00 PM',
+                                    isPlayed: true
+                                }
+                            ]
+                        }
+                    ],
+
+
+                    currentPage: 1,
+                    Previous: 'Yesterday',
+                    Next: 'Tomorrow',
+
+
+
+
+                    footerLogoName: 'white_logo.png',
+                    aboutHead: 'About',
+                    about: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+
+                },
+                created: function () {
+                    //console.log(getParameterByName("test"));
+
+                }
+            });
+
+        </script>
+    }

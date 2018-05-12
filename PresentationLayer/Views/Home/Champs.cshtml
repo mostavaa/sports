@@ -1,0 +1,52 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+
+}
+<div id="app">
+    
+    <div>
+        <div class="fh5co_tags_all" style="padding: 100px;">
+            <a href="#" class="fh5co_tagg" v-for="item in listChamps">{{item}}</a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+
+
+                imagesUrl: '../../images/',
+
+
+
+                listChamps: [
+                    "الدوري المصري",
+                    "الدوري الانجليزي",
+                    "Technology",
+                    "Sport",
+                    "Art",
+                    "Lifestyle",
+                    "Three",
+                    "Photography",
+                    "Lifestyle",
+                    "Education",
+                    "Social",
+
+                ],
+
+
+          },
+            created:function() {
+                //console.log(getParameterByName("test"));
+
+            }
+        });
+
+</script>
+}

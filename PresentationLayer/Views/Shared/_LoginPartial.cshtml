@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+        <li class="nav-item @(controller=="Manage" && action== "Index"?"active":"")">
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {@class= "nav-link", title = "Manage" })
+        </li>
+        <li class="nav-item "><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    }
+}
+else
+{
+        <li class="nav-item @(controller=="Account" && action== "Register"?"active":"")">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class="nav-link" ,id = "registerLink" })</li>
+        <li class="nav-item @(controller=="Account" && action== "Login"?"active":"")">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link", id = "loginLink" })</li>
+    
+}

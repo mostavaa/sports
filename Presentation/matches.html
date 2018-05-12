@@ -63,19 +63,19 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">{{items.home}} <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="index.html">{{items.home}} <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">{{items.champs}} <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="champ.html">{{items.champs}} <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">{{items.goals}} <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="goals.html">{{items.goals}} <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="">{{items.gallery}} <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="albums.html">{{items.gallery}} <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link active" href="">{{items.matches}} <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link active" href="matches.html">{{items.matches}} <span class="sr-only">(current)</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -87,11 +87,13 @@
         <div>
             <div class="fh5co_tags_all" style="padding: 100px;">
                 <div id="search" style="margin: 0 auto;width: 70%">
-                    <form class="row" id="fh5co_contact_form">
-                        <div class="col-12 py-3">
-                            <input type="text" v-model="searchQ"class="form-control fh5co_contact_text_box" placeholder="">
+                    <div class="row mx-0 animate-box fadeInUp animated-fast" data-animate-effect="fadeInUp">
+                        <div class="col-12 text-center pb-4 pt-4">
+                            <a href="#" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
+                            <a href="#" class="btn_pagging "  >{{currentPage}}</a>
+                            <a href="#" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div v-for="tournament in tournaments">
                     <div>
@@ -244,7 +246,12 @@
                 ],
 
 
-                searchQ: '',
+                currentPage: 1,
+                Previous: 'Yesterday',
+                Next: 'Tomorrow',
+
+
+
 
                 footerLogoName: 'white_logo.png',
                 aboutHead: 'About',
