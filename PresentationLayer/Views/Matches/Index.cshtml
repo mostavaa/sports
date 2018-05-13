@@ -3,79 +3,62 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="container">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstTeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstTeamGoals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondTeamGoals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondTeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPlayed)
+            </th>
 
-<h2>Index</h2>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstTeamName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondTeamName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstTeamGoals)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondTeamGoals)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MatchDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPlayed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GUID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstTeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstTeamGoals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecondTeamGoals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SecondTeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPlayed)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstTeamName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondTeamName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstTeamGoals)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondTeamGoals)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MatchDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPlayed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GUID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
+    
+</div>
