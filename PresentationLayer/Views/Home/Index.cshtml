@@ -194,229 +194,228 @@
 </div>
 
 @section scripts{
-    <script>
+<script>
 
-        var app = new Vue({
-                el: '#app',
-                data: {
-                    item: {
+    var app = new Vue({
+        el: '#app',
+        data: {
 
-                    imagesUrl: '../../images/',
+            imagesUrl: '../../images/',
 
-                    firstItem: {
-                        imageName: 'nick-karvounis-78711.jpg',
-                        date: new Date(),
-                        link: 'single.html',
-                        desc: 'After all is said and done, more is said than done'
-                    },
-                    latestItems: [
-                        {
-                            imageName: 'science-578x362.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'After all is said and done, more is said than done'
-                        },
-                        {
-                            imageName: 'science-578x362.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'After all is said and done, more is said than done'
-                        },
-                        {
-                            imageName: 'science-578x362.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'After all is said and done, more is said than done'
-                        },
-                        {
-                            imageName: 'science-578x362.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'After all is said and done, more is said than done'
-                        }
-                    ],
-
-
-                    latest5s1Header: 'Trending',
-                    latest5s1Items: [
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        }, {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        }
-                    ],
-
-
-                    latest4s2Header: 'News',
-                    latest4s2Items: [
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        }
-                    ],
-
-
-                    latest4s3Header: 'News',
-                    latest4s3Items: [
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        },
-                        {
-                            imageName: 'nick-karvounis-78711.jpg',
-                            date: new Date(),
-                            link: 'single.html',
-                            desc: 'Here a new way to take better photos for instagram'
-                        }
-                    ],
-
-
-                    listHeader: 'news',
-                    listNews: [
-                        {
-                            imageName: 'nathan-mcbride-229637.jpg',
-                            link: 'single.html',
-                            head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
-                            date: new Date(),
-                            desc:
-                                'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
-                        },
-                        {
-                            imageName: 'nathan-mcbride-229637.jpg',
-                            link: 'single.html',
-                            head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
-                            date: new Date(),
-                            desc:
-                                'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
-                        },
-                        {
-                            imageName: 'nathan-mcbride-229637.jpg',
-                            link: 'single.html',
-                            head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
-                            date: new Date(),
-                            desc:
-                                'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
-                        },
-                        {
-                            imageName: 'nathan-mcbride-229637.jpg',
-                            link: 'single.html',
-                            head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
-                            date: new Date(),
-                            desc:
-                                'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
-                        }
-                    ],
-
-                    currentPage: 1,
-                    pages: [1, 2, 3, 4, 5],
-                    Previous: 'Previous',
-                    Next: 'Next',
-
-                    mostPopularHeading: 'Most Popular',
-                    listMostPopular: [
-                        {
-                            imageName: 'download (1).jpg',
-                            link: 'single.html',
-                            date: new Date(),
-                            desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
-                        },
-                        {
-                            imageName: 'download (1).jpg',
-                            link: 'single.html',
-                            date: new Date(),
-                            desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
-                        },
-                        {
-                            imageName: 'download (1).jpg',
-                            link: 'single.html',
-                            date: new Date(),
-                            desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
-                        },
-                        {
-                            imageName: 'download (1).jpg',
-                            link: 'single.html',
-                            date: new Date(),
-                            desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
-                        }
-                    ],
-
-                }
+            firstItem: {
+                imageName: 'nick-karvounis-78711.jpg',
+                date: new Date(),
+                link: 'single.html',
+                desc: 'After all is said and done, more is said than done'
             },
-            methods:
+            latestItems: [
+                {
+                    imageName: 'science-578x362.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'After all is said and done, more is said than done'
+                },
+                {
+                    imageName: 'science-578x362.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'After all is said and done, more is said than done'
+                },
+                {
+                    imageName: 'science-578x362.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'After all is said and done, more is said than done'
+                },
+                {
+                    imageName: 'science-578x362.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'After all is said and done, more is said than done'
+                }
+            ],
+
+
+            latest5s1Header: 'Trending',
+            latest5s1Items: [
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                }, {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                }
+            ],
+
+
+            latest4s2Header: 'News',
+            latest4s2Items: [
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                }
+            ],
+
+
+            latest4s3Header: 'News',
+            latest4s3Items: [
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                },
+                {
+                    imageName: 'nick-karvounis-78711.jpg',
+                    date: new Date(),
+                    link: 'single.html',
+                    desc: 'Here a new way to take better photos for instagram'
+                }
+            ],
+
+
+            listHeader: 'news',
+            listNews: [
+                {
+                    imageName: 'nathan-mcbride-229637.jpg',
+                    link: 'single.html',
+                    head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
+                    date: new Date(),
+                    desc:
+                    'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
+                },
+                {
+                    imageName: 'nathan-mcbride-229637.jpg',
+                    link: 'single.html',
+                    head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
+                    date: new Date(),
+                    desc:
+                    'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
+                },
+                {
+                    imageName: 'nathan-mcbride-229637.jpg',
+                    link: 'single.html',
+                    head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
+                    date: new Date(),
+                    desc:
+                    'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
+                },
+                {
+                    imageName: 'nathan-mcbride-229637.jpg',
+                    link: 'single.html',
+                    head: 'Magna aliqua ut enim ad minim veniam quis nostrud quis xercitation ullamco.',
+                    date: new Date(),
+                    desc:
+                    'Amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
+                }
+            ],
+
+            currentPage: 1,
+            pages: [1, 2, 3, 4, 5],
+            Previous: 'Previous',
+            Next: 'Next',
+
+            mostPopularHeading: 'Most Popular',
+            listMostPopular: [
+                {
+                    imageName: 'download (1).jpg',
+                    link: 'single.html',
+                    date: new Date(),
+                    desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
+                },
+                {
+                    imageName: 'download (1).jpg',
+                    link: 'single.html',
+                    date: new Date(),
+                    desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
+                },
+                {
+                    imageName: 'download (1).jpg',
+                    link: 'single.html',
+                    date: new Date(),
+                    desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
+                },
+                {
+                    imageName: 'download (1).jpg',
+                    link: 'single.html',
+                    date: new Date(),
+                    desc: 'Magna aliqua ut enim ad minim veniam quis nostrud.'
+                }
+            ],
+
+
+        },
+        methods:
         {
         },
-        created: function() {
+        created: function () {
             //console.log(getParameterByName("test"));
 
         }
     });
 
-        function GetInitialData() {
+    function GetInitialData() {
 
-            //most 5 popular
-            //latest 5 news
-            //pagination info
-            //latest 5 in 3 sections
-            //first 5 news
-            $.ajax("@Url.Action("", "Home") ")
-        }
-    </script>
+        //most 5 popular
+        //latest 5 news
+        //pagination info
+        //latest 5 in 3 sections
+        //first 5 news
+        $.ajax("@Url.Action("", "Home") ")
+    }
+</script>
 }
