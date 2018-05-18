@@ -47,7 +47,7 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstTeamName,SecondTeamName,FirstTeamGoals,SecondTeamGoals,GoalDateTime,IsPlayed,GUID,CreatedTime,CreatedBy")] Goal Goal)
+        public ActionResult Create( Goal Goal)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstTeamName,SecondTeamName,FirstTeamGoals,SecondTeamGoals,GoalDateTime,IsPlayed,GUID,CreatedTime,CreatedBy")] Goal Goal)
+        public ActionResult Edit( Goal Goal)
         {
             if (ModelState.IsValid)
             {

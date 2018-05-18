@@ -470,7 +470,6 @@
     <Content Include="Views\Goals\Index.cshtml" />
     <Content Include="Views\Championship\Create.cshtml" />
     <Content Include="Views\Championship\Delete.cshtml" />
-    <Content Include="Views\Championship\Details.cshtml" />
     <Content Include="Views\Championship\Edit.cshtml" />
     <Content Include="Views\Championship\Index.cshtml" />
   </ItemGroup>

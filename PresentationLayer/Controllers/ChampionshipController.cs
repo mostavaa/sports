@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using PresentationLayer.Models;
 using PresentationLayer.Models.dbModels;
@@ -13,27 +9,12 @@ namespace PresentationLayer.Controllers
 {
     public class ChampionshipController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Championships
         public ActionResult Index()
         {
-            return View(db.Championships.ToList());
-        }
-
-        // GET: Championships/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Championship Championship = db.Championships.Find(id);
-            if (Championship == null)
-            {
-                return HttpNotFound();
-            }
-            return View(Championship);
+            return View(_db.Championships.ToList());
         }
 
         // GET: Championships/Create
@@ -47,16 +28,16 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstTeamName,SecondTeamName,FirstTeamGoals,SecondTeamGoals,ChampionshipDateTime,IsPlayed,GUID,CreatedTime,CreatedBy")] Championship Championship)
+        public ActionResult Create( Championship championship)
         {
             if (ModelState.IsValid)
             {
-                db.Championships.Add(Championship);
-                db.SaveChanges();
+                _db.Championships.Add(championship);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(Championship);
+            return View(championship);
         }
 
         // GET: Championships/Edit/5
@@ -66,12 +47,12 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Championship Championship = db.Championships.Find(id);
-            if (Championship == null)
+            Championship championship = _db.Championships.Find(id);
+            if (championship == null)
             {
                 return HttpNotFound();
             }
-            return View(Championship);
+            return View(championship);
         }
 
         // POST: Championships/Edit/5
@@ -79,15 +60,15 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstTeamName,SecondTeamName,FirstTeamGoals,SecondTeamGoals,ChampionshipDateTime,IsPlayed,GUID,CreatedTime,CreatedBy")] Championship Championship)
+        public ActionResult Edit( Championship championship)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(Championship).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(championship).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(Championship);
+            return View(championship);
         }
 
         // GET: Championships/Delete/5
@@ -97,12 +78,12 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Championship Championship = db.Championships.Find(id);
-            if (Championship == null)
+            Championship championship = _db.Championships.Find(id);
+            if (championship == null)
             {
                 return HttpNotFound();
             }
-            return View(Championship);
+            return View(championship);
         }
 
         // POST: Championships/Delete/5
@@ -110,9 +91,9 @@ namespace PresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Championship Championship = db.Championships.Find(id);
-            db.Championships.Remove(Championship);
-            db.SaveChanges();
+            Championship championship = _db.Championships.Find(id);
+            if (championship != null) _db.Championships.Remove(championship);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +101,7 @@ namespace PresentationLayer.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
