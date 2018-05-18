@@ -1,0 +1,15 @@
+﻿@model DateTime?
+@{
+    DateTime now = Model ?? DateTime.Now;
+    var Date = now.ToString("yyyy-M-ddTHH:m:sZ");
+    var DisplayDate = now.ToString("dd MMMM yyyy - hh:mm tt");
+    var ValDate = now.ToString("yyyy-M-dd HH:m:s");
+    <div class="form-group">
+
+        <div class="input-group date form_datetime col-md-5" data-date="@Date" @*data-date="1979-09-16T05:25:07Z"*@ data-date-format="dd MM yyyy - HH:ii p" data-link-field="@Html.NameForModel()">
+            <input class="" size="16" id="" value="@DisplayDate" name="" type="text" disabled="disabled">
+            <br /><span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+        </div>
+        <input id="@Html.NameForModel()" name="@Html.NameForModel()" value="@ValDate" type="hidden">
+    </div>
+}

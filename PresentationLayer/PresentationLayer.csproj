@@ -472,6 +472,8 @@
     <Content Include="Views\Championship\Delete.cshtml" />
     <Content Include="Views\Championship\Edit.cshtml" />
     <Content Include="Views\Championship\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -57,7 +57,7 @@
                             @Html.ValidationMessageFor(model => model.SecondTeamName, "", new { @class = "text-danger" })
                         </td>
                         <td>
-                            @Html.EditorFor(model => model.MatchDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.MatchDateTime)
                             @Html.ValidationMessageFor(model => model.MatchDateTime, "", new { @class = "text-danger" })
                         </td>
                         <td>
@@ -80,32 +80,12 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-    <div class="form-group">
-        <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
-        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-            <input class="form-control" size="16" type="text" value="" disabled="disabled">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-        </div>
-        <input type="hidden" id="dtp_input1" value="2018-05-13 20:31:10"><br>
-    </div>
+
 </div>
 
 @section Scripts {
-    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function() {
-            $('.form_datetime').datetimepicker({
-                //language:  'fr',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                showMeridian: 1
-            });
-        });
+
     </script>
 }

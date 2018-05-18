@@ -21,21 +21,6 @@ namespace PresentationLayer.Controllers
             return View(db.Matchs.ToList());
         }
 
-        // GET: Matches/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Match match = db.Matchs.Find(id);
-            if (match == null)
-            {
-                return HttpNotFound();
-            }
-            return View(match);
-        }
-
         // GET: Matches/Create
         public ActionResult Create()
         {
