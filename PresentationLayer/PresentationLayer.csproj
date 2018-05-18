@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201805051810528_AddMainEntities.Designer.cs">
       <DependentUpon>201805051810528_AddMainEntities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805181740480_MatchForChampionship.cs" />
+    <Compile Include="Migrations\201805181740480_MatchForChampionship.Designer.cs">
+      <DependentUpon>201805181740480_MatchForChampionship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common.cs" />
@@ -221,6 +225,7 @@
     <Compile Include="Models\dbModels\Match.cs" />
     <Compile Include="Models\dbModels\News.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Repositories\NewsRepository.cs" />
     <Compile Include="Models\Repositories\MatchRepository.cs" />
@@ -487,6 +492,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805051810528_AddMainEntities.resx">
       <DependentUpon>201805051810528_AddMainEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805181740480_MatchForChampionship.resx">
+      <DependentUpon>201805181740480_MatchForChampionship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

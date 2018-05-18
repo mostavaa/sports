@@ -9,7 +9,12 @@
     </p>
     <table class="table">
         <tr>
+          
             <th>
+                @Html.DisplayNameFor(model => model.Match.ChampionshipId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.GoalLink)
@@ -17,13 +22,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.GoalPlayerName)
             </th>
-
-
             <th></th>
         </tr>
 
         @foreach (var item in Model) {
             <tr>
+             
+                <td>
+                    @Html.DisplayFor(modelItem => item.Match.Championship.ChampName)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Match.FirstTeamName)-@Html.DisplayFor(modelItem => item.Match.SecondTeamName)
                 </td>
@@ -34,8 +41,8 @@
                     @Html.DisplayFor(modelItem => item.GoalPlayerName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                    @Html.ActionLink("Details", "Details", new {id = item.Id}) |
                 </td>
             </tr>
         }

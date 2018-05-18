@@ -7,7 +7,7 @@ using PresentationLayer.Models.dbModels;
 
 namespace PresentationLayer.Controllers
 {
-    public class ChampionshipController : Controller
+    public class ChampionshipController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 

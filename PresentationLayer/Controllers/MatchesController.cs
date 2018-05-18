@@ -8,22 +8,25 @@ using System.Web;
 using System.Web.Mvc;
 using PresentationLayer.Models;
 using PresentationLayer.Models.dbModels;
+using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
-    public class MatchesController : Controller
+    public class MatchesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Matches
         public ActionResult Index()
         {
+            
             return View(db.Matchs.ToList());
         }
 
         // GET: Matches/Create
         public ActionResult Create()
         {
+            ViewBag.Championships = AllChampionships();
             return View();
         }
 
@@ -40,7 +43,7 @@ namespace PresentationLayer.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Championships = AllChampionships(match.ChampionshipId??0);
             return View(match);
         }
 
@@ -56,6 +59,7 @@ namespace PresentationLayer.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Championships = AllChampionships(match.ChampionshipId ?? 0 );
             return View(match);
         }
 
@@ -72,6 +76,7 @@ namespace PresentationLayer.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Championships = AllChampionships(match.ChampionshipId ?? 0);
             return View(match);
         }
 

@@ -8,15 +8,9 @@ namespace PresentationLayer.Models.Repositories
 {
     public class NewsRepository:Repository<News>
     {
-        public ApplicationDbContext Context { get; }
+        public NewsRepository(ApplicationDbContext context) : base(context)
+        {
 
-        public NewsRepository()
-        {
-           
-        }
-        public NewsRepository(ApplicationDbContext ctx):this()
-        {
-            Context = ctx;
         }
         /// <summary>
         /// return champ , and list of selected news
@@ -25,8 +19,8 @@ namespace PresentationLayer.Models.Repositories
         public Dictionary<Championship, List<News>> GetLatestNews()
         {
             Dictionary<Guid, List<News>> Latest = new Dictionary<Guid, List<News>>();
-            long MaxId = Context.Championships.Max(o => o.Id);
-            long MinId = Context.Championships.Min(o => o.Id);
+            long MaxId = _context.Championships.Max(o => o.Id);
+            long MinId = _context.Championships.Min(o => o.Id);
             Random Rand = new Random();
             int SelectedId = 0;
             UnitOfWork uow = new UnitOfWork();
@@ -51,7 +45,7 @@ namespace PresentationLayer.Models.Repositories
             var Result = new Dictionary<Championship, List<News>>();
             foreach (var item in Latest)
             {
-                    Result.Add(uow.ChampionshipRepository.GetByID(item.Key) , item.Value);
+                    Result.Add(uow.ChampionshipRepository.GetById(item.Key) , item.Value);
             }
             return Result;
         }

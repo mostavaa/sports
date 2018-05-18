@@ -1,9 +1,10 @@
-﻿@model PresentationLayer.Models.dbModels.Goal
+﻿@using PresentationLayer.Models.dbModels
+@model PresentationLayer.Models.dbModels.Goal
 
 @{
     ViewBag.Title = "Create";
 }
-<div class="container">
+<div id="app" class="container">
 
 
 
@@ -16,37 +17,46 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>
-                            @Html.LabelFor(model => model.GoalLink, htmlAttributes: new { @class = "control-label col-md-2" })
-                        </th>
+                <tr>
+                    <th>
+                        @Html.LabelFor(model =>new Championship().ChampName , htmlAttributes: new { @class = "control-label col-md-2" })
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.MatchId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.GoalLink, htmlAttributes: new {@class = "control-label col-md-2"})
+                    </th>
 
-                        <th>
-                            @Html.LabelFor(model => model.GoalPlayerName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        </th>
-                        <th>
-                            @Html.LabelFor(model => model.MatchId, htmlAttributes: new { @class = "control-label col-md-2" })
-                        </th>
-  
-                    </tr>
+                    <th>
+                        @Html.LabelFor(model => model.GoalPlayerName, htmlAttributes: new {@class = "control-label col-md-2"})
+                    </th>
+                 
+
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            @Html.EditorFor(model => model.GoalLink, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.GoalLink, "", new { @class = "text-danger" })
-                        </td>
-                        <td>
-                            @Html.EditorFor(model => model.GoalPlayerName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.GoalPlayerName, "", new { @class = "text-danger" })
-                        </td>
-                        <td>
-                            @Html.EditorFor(model => model.MatchId, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.MatchId, "", new { @class = "text-danger" })
-                        </td>
-                    
-                       
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => new Championship().ChampName, (IEnumerable<SelectListItem>)ViewBag.Championships, new { @class = "form-control"  })
+                        @Html.ValidationMessageFor(model => model.GoalLink, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        <select class = "form-control" id="@Html.IdFor(model => model.MatchId)" name="@Html.IdFor(model => model.MatchId)">
+                            <option v-for="item in matches" v-bind:value="item.Value">{{item.Text}}</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.GoalLink, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.GoalLink, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.GoalLink, "", new {@class = "text-danger"})
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.GoalPlayerName, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.GoalPlayerName, "", new {@class = "text-danger"})
+                    </td>
+                   
+                </tr>
                 </tbody>
             </table>
             <div class="">
@@ -63,21 +73,53 @@
 </div>
 
 @section Scripts {
-    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function() {
-            $('.form_datetime').datetimepicker({
-                //language:  'fr',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                showMeridian: 1
-            });
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                matches:[],
+            },
+            created: function () {
+                $("#@Html.IdFor(o=> new Championship().ChampName)").attr("v-on:change", "ChampionshipChanged($event)");
+                if ($("#@Html.IdFor(o=> new Championship().ChampName)").val()) {
+                    $.ajax({
+                        url: '@Url.Action("ChampionshipMatches" , "Goals")?id=' + $("#@Html.IdFor(o=> new Championship().ChampName)").val(),
+                        data: {
+                            format: 'json'
+                        },
+                        success: function(data) {
+                            for (var i = 0; i < data.length; i++) {
+                                app.matches.push(data[i]);
+                            }
+                        },
+                        type: 'GET'
+                    });
+                }
+
+            },
+            methods:
+            {
+                ChampionshipChanged:function(e) {
+                    var SelectedChampionshipId = e.target.value;
+                    if (SelectedChampionshipId) {
+                        $.ajax({
+                            url: '@Url.Action("ChampionshipMatches" , "Goals")?id=' + SelectedChampionshipId,
+                            data: {
+                                format: 'json'
+                            },
+                            success: function(data) {
+                                for (var i = 0; i < data.length; i++) {
+                                    app.matches.push(data[i]);
+                                }
+                            },
+                            type: 'GET'
+                        });
+                    }
+                }
+            }
         });
+
     </script>
 }

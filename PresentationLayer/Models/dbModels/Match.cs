@@ -14,7 +14,8 @@ namespace PresentationLayer.Models.dbModels
         public DateTime MatchDateTime { get; set; }
         public bool IsPlayed { get; set; }
 
-
+        public long? ChampionshipId { get; set; }
+        public virtual Championship Championship { get; set; }
         public virtual ICollection<News> News { get; set; } = new HashSet<News>();
         public virtual ICollection<Album> Albums { get; set; } = new HashSet<Album>();
         public virtual ICollection<Goal> Goals { get; set; } = new HashSet<Goal>();

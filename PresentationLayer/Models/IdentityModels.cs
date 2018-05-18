@@ -30,6 +30,7 @@ namespace PresentationLayer.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Championship>().HasMany(o => o.News).WithOptional(o => o.Championship).HasForeignKey(o => o.ChampionshipId);
+            modelBuilder.Entity<Championship>().HasMany(o => o.Matches).WithOptional(o => o.Championship).HasForeignKey(o => o.ChampionshipId);
             modelBuilder.Entity<Match>().HasMany(o => o.News).WithOptional(o => o.Match).HasForeignKey(o => o.MatchId);
             modelBuilder.Entity<News>().HasMany(o => o.Albums).WithOptional(o => o.News).HasForeignKey(o => o.NewsId);
             modelBuilder.Entity<Match>().HasMany(o => o.Albums).WithOptional(o => o.Match).HasForeignKey(o => o.MatchId);

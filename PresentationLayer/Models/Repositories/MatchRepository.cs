@@ -4,17 +4,11 @@ namespace PresentationLayer.Models.Repositories
 {
     public class MatchRepository:Repository<Match>
     {
-        public ApplicationDbContext Context { get; }
+        public MatchRepository(ApplicationDbContext context) : base(context)
+        {
 
-        public MatchRepository()
-        {
-           
-        }
-        public MatchRepository(ApplicationDbContext ctx):this()
-        {
-            Context = ctx;
         }
 
-       
+
     }
 }

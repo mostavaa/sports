@@ -11,5 +11,6 @@ namespace PresentationLayer.Models.dbModels
 
 
         public virtual ICollection<News> News { get; set; } = new HashSet<News>();
+        public virtual ICollection<Match> Matches { get; set; } = new HashSet<Match>();
     }
 }

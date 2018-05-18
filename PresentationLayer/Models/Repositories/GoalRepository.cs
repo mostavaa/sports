@@ -4,17 +4,12 @@ namespace PresentationLayer.Models.Repositories
 {
     public class GoalRepository:Repository<Goal>
     {
-        public ApplicationDbContext Context { get; }
+     
+        public GoalRepository(ApplicationDbContext context) : base(context)
+        {
 
-        public GoalRepository()
-        {
-           
-        }
-        public GoalRepository(ApplicationDbContext ctx):this()
-        {
-            Context = ctx;
         }
 
-       
+
     }
 }

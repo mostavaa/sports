@@ -2,19 +2,12 @@
 
 namespace PresentationLayer.Models.Repositories
 {
-    public class ChampionshipRepository:Repository<Championship>
+    public class ChampionshipRepository : Repository<Championship>
     {
-        public ApplicationDbContext Context { get; }
+        public ChampionshipRepository(ApplicationDbContext context) : base(context)
+        {
 
-        public ChampionshipRepository()
-        {
-           
-        }
-        public ChampionshipRepository(ApplicationDbContext ctx):this()
-        {
-            Context = ctx;
         }
 
-       
     }
 }

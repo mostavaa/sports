@@ -4,17 +4,11 @@ namespace PresentationLayer.Models.Repositories
 {
     public class AlbumRepository:Repository<Album>
     {
-        public ApplicationDbContext Context { get; }
 
-        public AlbumRepository()
+        public AlbumRepository(ApplicationDbContext context):base(context)
         {
-           
-        }
-        public AlbumRepository(ApplicationDbContext ctx):this()
-        {
-            Context = ctx;
-        }
 
+        }
        
     }
 }

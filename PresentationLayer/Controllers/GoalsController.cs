@@ -4,41 +4,30 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using PresentationLayer.Models;
 using PresentationLayer.Models.dbModels;
+using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
-    public class GoalsController : Controller
+    public class GoalsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Goals
         public ActionResult Index()
         {
-            return View(db.Goals.ToList());
+            return View(_db.Goals.ToList());
         }
 
-        // GET: Goals/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Goal Goal = db.Goals.Find(id);
-            if (Goal == null)
-            {
-                return HttpNotFound();
-            }
-            return View(Goal);
-        }
-
+     
         // GET: Goals/Create
         public ActionResult Create()
         {
+            ViewBag.Championships = AllChampionships();
             return View();
         }
 
@@ -47,16 +36,20 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Goal Goal)
+        public ActionResult Create(Goal goal)
         {
+            
             if (ModelState.IsValid)
             {
-                db.Goals.Add(Goal);
-                db.SaveChanges();
+                UnitOfWork uow = new UnitOfWork();
+                uow.GoalRepository.Insert(goal);
+                uow.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(Goal);
+            ViewBag.Championships = AllChampionships();
+            
+            return View(goal);
         }
 
         // GET: Goals/Edit/5
@@ -66,12 +59,14 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Goal Goal = db.Goals.Find(id);
-            if (Goal == null)
+            Goal goal = _db.Goals.Find(id);
+            if (goal == null)
             {
                 return HttpNotFound();
             }
-            return View(Goal);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: goal.Match.ChampionshipId ?? 0);
+            
+            return View(goal);
         }
 
         // POST: Goals/Edit/5
@@ -79,24 +74,28 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Goal Goal)
+        public ActionResult Edit(Goal goal)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(Goal).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(goal).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(Goal);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: goal.Match.ChampionshipId ?? 0);
+            //ViewBag.Matches = AllMatches(addNullEntry: false, selectedMatchId: goal.MatchId, ChampionshipId: goal.Match?.ChampionshipId);
+            return View(goal);
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
+
+       
     }
 }

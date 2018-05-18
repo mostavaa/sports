@@ -2,25 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq.Expressions;
 
 namespace PresentationLayer.Models.Repositories
 {
     public class Repository<T> where T : class
     {
-        private readonly ApplicationDbContext context;
-        private DbSet<T> Entities;
-        string errorMessage = string.Empty;
+        public  ApplicationDbContext _context;
+        private DbSet<T> _entities;
 
-        public Repository()
-        {
-            
-        }
+      
         public Repository(ApplicationDbContext context)
         {
-            this.context = context;
-            this.Entities = context.Set<T>();
+            _context = context;
+            _entities = context.Set<T>();
         }
 
         public virtual IEnumerable<T> Get(
@@ -28,7 +23,7 @@ namespace PresentationLayer.Models.Repositories
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<T> query = Entities;
+            IQueryable<T> query = _entities;
 
             if (filter != null)
             {
@@ -36,7 +31,7 @@ namespace PresentationLayer.Models.Repositories
             }
 
             foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                (new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperty);
             }
@@ -51,35 +46,35 @@ namespace PresentationLayer.Models.Repositories
             }
         }
 
-        public virtual T GetByID(params object [] id)
+        public virtual T GetById(params object [] id)
         {
-            return Entities.Find(id);
+            return _entities.Find(id);
         }
 
         public virtual void Insert(T entity)
         {
-            Entities.Add(entity);
+            _entities.Add(entity);
         }
 
         public virtual void Delete(long id)
         {
-            T entityToDelete = Entities.Find(id);
+            T entityToDelete = _entities.Find(id);
             Delete(entityToDelete);
         }
 
         public virtual void Delete(T entityToDelete)
         {
-            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            if (_context.Entry(entityToDelete).State == EntityState.Detached)
             {
-                Entities.Attach(entityToDelete);
+                _entities.Attach(entityToDelete);
             }
-            Entities.Remove(entityToDelete);
+            _entities.Remove(entityToDelete);
         }
 
         public virtual void Update(T entityToUpdate)
         {
-            Entities.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
+            _entities.Attach(entityToUpdate);
+            _context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
 
