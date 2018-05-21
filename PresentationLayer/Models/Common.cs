@@ -14,5 +14,7 @@ namespace PresentationLayer.Models
 
         public static int NumOfHomeSections = 3;
         public static int NumOfNewsInHomeSection = 5;
+        public static int IconHeight = 60;
+        public static int IconWidth = 60;
     }
 }

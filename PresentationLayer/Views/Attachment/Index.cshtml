@@ -1,0 +1,48 @@
+﻿@using PresentationLayer.Models.dbModels
+@model System.Collections.Generic.List<PresentationLayer.Models.dbModels.Attachment>
+
+@{
+    ViewBag.Title = "title";
+}
+
+
+<div class="container">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => new Attachment().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => new Attachment().AlbumId)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var ImageName = @item.GUID + ".png";
+                    }
+                    <a href="~/Content/Images/@ImageName"><img src="/Content/Images/Icons/@ImageName" /></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Album.AlbumName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

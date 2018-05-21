@@ -193,7 +193,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\AttachmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
@@ -479,9 +481,18 @@
     <Content Include="Views\Championship\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Attachment\Index.cshtml" />
+    <Content Include="Views\Attachment\Create.cshtml" />
+    <Content Include="Views\Attachment\Edit.cshtml" />
+    <Content Include="Views\Attachment\Delete.cshtml" />
+    <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Album\Delete.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Icons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

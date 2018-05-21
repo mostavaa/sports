@@ -1,9 +1,10 @@
 ﻿@using PresentationLayer.Models.dbModels
-@model PresentationLayer.Models.dbModels.Goal
+@model PresentationLayer.Models.dbModels.Album
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "title";
 }
+
 <div id="app" class="container">
 
 
@@ -15,6 +16,8 @@
 
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
             <table class="table">
                 <thead>
                 <tr>
@@ -25,13 +28,11 @@
                         @Html.LabelFor(model => model.MatchId, htmlAttributes: new { @class = "control-label col-md-2" })
                     </th>
                     <th>
-                        @Html.LabelFor(model => model.GoalLink, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.NewsId, htmlAttributes: new { @class = "control-label col-md-2" })
                     </th>
-
                     <th>
-                        @Html.LabelFor(model => model.GoalPlayerName, htmlAttributes: new {@class = "control-label col-md-2"})
+                        @Html.LabelFor(model => model.AlbumName, htmlAttributes: new { @class = "control-label col-md-2" })
                     </th>
-                 
 
                 </tr>
                 </thead>
@@ -39,23 +40,23 @@
                 <tr>
                     <td>
                         @Html.DropDownListFor(model => new Championship().ChampName, (IEnumerable<SelectListItem>)ViewBag.Championships, new { @class = "form-control"  })
-                        @Html.ValidationMessageFor(model => model.GoalLink, "", new { @class = "text-danger" })
                     </td>
                     <td>
-                        <select class = "form-control" id="@Html.IdFor(model => model.MatchId)" name="@Html.IdFor(model => model.MatchId)">
+                        <select v-model="match" class = "form-control" id="@Html.IdFor(model => model.MatchId)" name="@Html.IdFor(model => model.MatchId)">
                             <option v-for="item in matches" v-bind:value="item.Value">{{item.Text}}</option>
                         </select>
                         @Html.ValidationMessageFor(model => model.MatchId, "", new { @class = "text-danger" })
                     </td>
                     <td>
-                        @Html.TextAreaFor(model => model.GoalLink, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.GoalLink, "", new {@class = "text-danger"})
+                        @Html.DropDownListFor(model => model.NewsId, (IEnumerable<SelectListItem>)ViewBag.News, new { @class = "form-control"  })
+                        @Html.ValidationMessageFor(model => model.NewsId, "", new { @class = "text-danger" })
+
                     </td>
                     <td>
-                        @Html.TextAreaFor(model => model.GoalPlayerName, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(model => model.GoalPlayerName, "", new {@class = "text-danger"})
+                        @Html.EditorFor(model => model.AlbumName, new { @class = "form-control"  })
+                        @Html.ValidationMessageFor(model => model.AlbumName, "", new {@class = "text-danger"})
+
                     </td>
-                   
                 </tr>
                 </tbody>
             </table>
@@ -71,26 +72,30 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@section scripts
+{
     <script>
-
         var app = new Vue({
             el: '#app',
             data: {
-                matches:[],
+                matches: [],
+                match:''
             },
             created: function () {
                 $("#@Html.IdFor(o=> new Championship().ChampName)").attr("v-on:change", "ChampionshipChanged($event)");
                 if ($("#@Html.IdFor(o=> new Championship().ChampName)").val()) {
                     $.ajax({
-                        url: '@Url.Action("ChampionshipMatches" , "Goals")?id=' + $("#@Html.IdFor(o=> new Championship().ChampName)").val(),
+                        url: '@Url.Action("ChampionshipMatches" , "Album")?id=' + $("#@Html.IdFor(o=> new Championship().ChampName)").val(),
                         data: {
                             format: 'json'
                         },
-                        success: function(data) {
+                        success: function (data) {
+                            var match = @Model.MatchId;
+                            app.match = match;
                             for (var i = 0; i < data.length; i++) {
+                                if (data[i].Value == match) {
+                                    data[i].Selected = true;
+                                }
                                 app.matches.push(data[i]);
                             }
                         },
@@ -105,12 +110,17 @@
                     var SelectedChampionshipId = e.target.value;
                     if (SelectedChampionshipId) {
                         $.ajax({
-                            url: '@Url.Action("ChampionshipMatches" , "Goals")?id=' + SelectedChampionshipId,
+                            url: '@Url.Action("ChampionshipMatches" , "Album")?id=' + SelectedChampionshipId,
                             data: {
                                 format: 'json'
                             },
-                            success: function(data) {
+                            success: function (data) {
+                                var match = @Model.MatchId;
+                                app.match = match;
                                 for (var i = 0; i < data.length; i++) {
+                                    if (data[i].Value == match) {
+                                        data[i].Selected = true;
+                                    }
                                     app.matches.push(data[i]);
                                 }
                             },
@@ -120,6 +130,5 @@
                 }
             }
         });
-
     </script>
 }
