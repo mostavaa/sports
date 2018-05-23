@@ -1,0 +1,70 @@
+﻿@using PresentationLayer.Models.dbModels
+@model System.Collections.Generic.List<PresentationLayer.Models.dbModels.News>
+
+@{
+    ViewBag.Title = "title";
+}
+
+
+<div class="container">
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => new News().ChampionshipId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => new News().MatchId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => new News().NewsHeading)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => new News().NewsDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => new News().Stars)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var ImageName = @item.GUID + ".png";
+                    }
+                    <a href="~/Content/Images/@ImageName"><img src="/Content/Images/Icons/@ImageName" /></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Championship.ChampName)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Match.FirstTeamName) @Html.DisplayFor(modelItem => item.Match.SecondTeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsHeading)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stars)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+
+                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

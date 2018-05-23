@@ -148,7 +148,15 @@ namespace PresentationLayer.Controllers
                 return null;
             }
         }
-
+        public void UploadImage(Guid id)
+        {
+            var httpPostedFileBase = Request.Files[0];
+            if (httpPostedFileBase != null)
+                using (var binaryReader = new BinaryReader(httpPostedFileBase.InputStream))
+                {
+                    UploadImagesToServer(id, binaryReader.ReadBytes(httpPostedFileBase.ContentLength));
+                }
+        }
         public string UploadImagesToServer(Guid id, byte[] imageBytes)
         {
             string imageName = string.Empty;

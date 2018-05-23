@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -7,103 +9,109 @@ using PresentationLayer.Models.dbModels;
 
 namespace PresentationLayer.Controllers
 {
-    public class AttachmentController : BaseController
+    public class NewsController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: Attachments
+        // GET: News
         public ActionResult Index()
         {
-            return View(_db.Attachments.ToList());
+            return View(_db.News.ToList());
         }
 
-        // GET: Attachments/Create
+        // GET: News/Create
         public ActionResult Create()
         {
-            ViewBag.Albums = AllAlbums(addNullEntry: false);
+            ViewBag.Championships = AllChampionships();
+            ViewBag.Matches = AllMatches();
             return View();
         }
 
-        // POST: Attachments/Create
+        // POST: News/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Attachment attachment)
+        public ActionResult Create( News news)
         {
             if (ModelState.IsValid)
             {
                 
-                _db.Attachments.Add(attachment);
+                _db.News.Add(news);
                 _db.SaveChanges();
-              UploadImage(attachment.GUID);
+                UploadImage(news.GUID);
+
                 return RedirectToAction("Index");
             }
-            ViewBag.Albums = AllAlbums(addNullEntry: false , selectedAlbumId:attachment.AlbumId);
-            return View(attachment);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: news.ChampionshipId ?? 0);
+            ViewBag.Matches = AllMatches(selectedMatchId: news.MatchId?? 0);
+            return View(news);
         }
 
 
-        // GET: Attachments/Edit/5
+        // GET: News/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Attachment attachment = _db.Attachments.Find(id);
-            if (attachment == null)
+            News news = _db.News.Find(id);
+            if (news == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Albums =  AllAlbums(addNullEntry: false, selectedAlbumId: attachment.AlbumId);
-            return View(attachment);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: news.ChampionshipId ?? 0);
+            ViewBag.Matches = AllMatches(selectedMatchId: news.MatchId ?? 0);
+            return View(news);
         }
 
-        // POST: Attachments/Edit/5
+        // POST: News/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Attachment attachment)
+        public ActionResult Edit( News news)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(attachment).State = EntityState.Modified;
+                _db.Entry(news).State = EntityState.Modified;
                 _db.SaveChanges();
-                UploadImage(attachment.GUID);
+
+                UploadImage(news.GUID);
                 return RedirectToAction("Index");
             }
-            ViewBag.Albums=AllAlbums(addNullEntry: false, selectedAlbumId: attachment.AlbumId);
-            return View(attachment);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: news.ChampionshipId ?? 0);
+            ViewBag.Matches = AllMatches(selectedMatchId: news.MatchId ?? 0);
+            return View(news);
         }
 
-        // GET: Attachments/Delete/5
+        // GET: News/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Attachment attachment = _db.Attachments.Find(id);
-            if (attachment == null)
+            News news = _db.News.Find(id);
+            if (news == null)
             {
                 return HttpNotFound();
             }
-            return View(attachment);
+            return View(news);
         }
 
-        // POST: Attachments/Delete/5
+        // POST: News/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Attachment attachment = _db.Attachments.Find(id);
-            if (attachment != null) _db.Attachments.Remove(attachment);
+            News news = _db.News.Find(id);
+            if (news != null) _db.News.Remove(news);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
- 
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)
