@@ -1,6 +1,7 @@
 ﻿@using System.Linq.Expressions
+@using PresentationLayer.Models
 @model DateTime?
 @{
-    Write(Model?.ToString("dd-MMM-yyyy h:mm tt") ?? "");
+    Write(Model?.ToString(Common.DateFormat) ?? "");
     
 }

@@ -9,6 +9,7 @@ using PresentationLayer.Models.dbModels;
 
 namespace PresentationLayer.Controllers
 {
+    [Authorize(Roles = "Adminstration")]
     public class AlbumController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();

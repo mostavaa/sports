@@ -12,6 +12,7 @@ using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
+    [Authorize(Roles = "Adminstration")]
     public class MatchesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -18,7 +18,7 @@ namespace PresentationLayer.Models.Repositories
         /// <returns></returns>
         public Dictionary<Championship, List<News>> GetLatestNews()
         {
-            Dictionary<Guid, List<News>> Latest = new Dictionary<Guid, List<News>>();
+            Dictionary<long, List<News>> Latest = new Dictionary<long, List<News>>();
             long MaxId = _context.Championships.Max(o => o.Id);
             long MinId = _context.Championships.Min(o => o.Id);
             Random Rand = new Random();
@@ -34,13 +34,15 @@ namespace PresentationLayer.Models.Repositories
                     Championship champ = uow.ChampionshipRepository.Get(o => o.Id == SelectedId).FirstOrDefault();
                     if (champ != null)
                     {
-                        if (!Latest.ContainsKey(champ.GUID))
+                        if (!Latest.ContainsKey(champ.Id))
                         {
                             champFound = true;
-                            Latest.Add(champ.GUID , champ.News.OrderByDescending(o=>o.CreatedTime).Take(Common.NumOfNewsInHomeSection).ToList());
+                            Latest.Add(champ.Id , champ.News.OrderByDescending(o=>o.CreatedTime).Take(Common.NumOfNewsInHomeSection).ToList());
                         }
                     }
                 } while (!champFound);
+                if (Common.NumOfHomeSections >uow.ChampionshipRepository.Get().Count())
+                    break;
             }
             var Result = new Dictionary<Championship, List<News>>();
             foreach (var item in Latest)
@@ -49,15 +51,25 @@ namespace PresentationLayer.Models.Repositories
             }
             return Result;
         }
-        public List<News> GetLatest5News()
+        public List<News> GetLatest5News(long championshipId=0)
         {
-            return Get().Take(5).ToList();
+            return championshipId > 0
+                ? Get(o => o.ChampionshipId == championshipId).Take(5).ToList()
+                : Get().Take(5).ToList();
+            
         }
 
-        public List<News> GetMostPopularIndex()
+        public List<News> GetMostPopularIndex(long championshipId=0)
         {
-            return Get(o => o.CreatedTime > DateTime.Now.AddMonths(Common.NumOfOldMonths), o => o.OrderByDescending(x => x.Stars))
-                .Take(Common.NumOfPopular).ToList();
+            DateTime nexMonth = DateTime.Now.AddMonths(Common.NumOfOldMonths);
+            return championshipId > 0
+                ? Get(o => o.CreatedTime > nexMonth && o.ChampionshipId == championshipId)
+                    .OrderByDescending(x => x.Stars)
+                    .Take(Common.NumOfPopular).ToList()
+                : Get(o => o.CreatedTime > nexMonth)
+                    .OrderByDescending(x => x.Stars)
+                    .Take(Common.NumOfPopular).ToList();
+           
         }
 
         public List<News> GetLatestNewsHomePage()
@@ -65,9 +77,13 @@ namespace PresentationLayer.Models.Repositories
             return Get().Take(Common.HomePageNumOfNews).ToList();
         }
 
-        public List<News> GetNews(int offset=0)
+        public List<News> GetNews(int offset=0 , long championshipId = 0)
         {
-            return Get().Skip(offset).Take(Common.DefaultTake).ToList();
+            return championshipId > 0
+                ? Get(o => o.ChampionshipId == championshipId).Skip(offset).Take(Common.DefaultTake).ToList()
+                : Get().Skip(offset).Take(Common.DefaultTake).ToList();
+
+
         }
     }
 }

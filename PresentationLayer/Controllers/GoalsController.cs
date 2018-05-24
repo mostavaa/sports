@@ -13,6 +13,7 @@ using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
+    [Authorize(Roles = "Adminstration")]
     public class GoalsController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();

@@ -8,7 +8,7 @@
     
     <div>
         <div class="fh5co_tags_all" style="padding: 100px;">
-            <a href="#" class="fh5co_tagg" v-for="item in listChamps">{{item}}</a>
+            <a v-bind:href="url+item.Key" class="fh5co_tagg" v-for="item in listChamps">{{item.Value}}</a>
         </div>
     </div>
 </div>
@@ -19,33 +19,32 @@
         var app = new Vue({
             el: '#app',
             data: {
-
+                url:'@Url.Action("Index" , "Home")?champId=',
 
                 imagesUrl: '../../images/',
 
 
 
                 listChamps: [
-                    "الدوري المصري",
-                    "الدوري الانجليزي",
-                    "Technology",
-                    "Sport",
-                    "Art",
-                    "Lifestyle",
-                    "Three",
-                    "Photography",
-                    "Lifestyle",
-                    "Education",
-                    "Social",
-
                 ],
 
 
           },
-            created:function() {
-                //console.log(getParameterByName("test"));
-
-            }
+            created: function () {
+                $.ajax({
+                    url: '@Url.Action("GetAllChampionships", "Home")',
+                        data: {
+                            format: 'json'
+                        },
+                        success: function (data) {
+                            app.listChamps = [];
+                            for (var i = 0; i < data.length; i++) {
+                                app.listChamps.push(data[i]);
+                            }
+                        },
+                        type: 'GET'
+                    });
+                }
         });
 
 </script>

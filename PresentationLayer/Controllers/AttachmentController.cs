@@ -7,6 +7,7 @@ using PresentationLayer.Models.dbModels;
 
 namespace PresentationLayer.Controllers
 {
+    [Authorize(Roles = "Adminstration")]
     public class AttachmentController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();

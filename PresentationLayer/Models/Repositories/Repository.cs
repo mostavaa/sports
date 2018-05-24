@@ -36,11 +36,11 @@ namespace PresentationLayer.Models.Repositories
                 query = query.Include(includeProperty);
             }
 
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
+            //if (orderBy != null)
+            //{
+            //    return orderBy(query).ToList();
+            //}
+            //else
             {
                 return query.ToList();
             }
