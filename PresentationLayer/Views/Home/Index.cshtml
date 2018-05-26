@@ -230,6 +230,7 @@
         methods:
         {
             getPrevious: function (e) {
+                debugger;
                 e.preventDefault();
                 if (app.previousPage) {
                     var url = '@Url.Action("getNews", "Home")?id=' + app.previousPage;

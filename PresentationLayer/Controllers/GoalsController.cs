@@ -45,6 +45,7 @@ namespace PresentationLayer.Controllers
                 UnitOfWork uow = new UnitOfWork();
                 uow.GoalRepository.Insert(goal);
                 uow.Save();
+                UploadImage(goal.GUID);
                 return RedirectToAction("Index");
             }
 
@@ -81,6 +82,7 @@ namespace PresentationLayer.Controllers
             {
                 _db.Entry(goal).State = EntityState.Modified;
                 _db.SaveChanges();
+                UploadImage(goal.GUID);
                 return RedirectToAction("Index");
             }
             ViewBag.Championships = AllChampionships(selectedChampionshipId: goal.Match.ChampionshipId ?? 0);

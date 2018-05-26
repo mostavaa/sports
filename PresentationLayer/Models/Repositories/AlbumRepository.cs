@@ -1,4 +1,7 @@
-﻿using PresentationLayer.Models.dbModels;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using PresentationLayer.Models.dbModels;
 
 namespace PresentationLayer.Models.Repositories
 {
@@ -9,6 +12,11 @@ namespace PresentationLayer.Models.Repositories
         {
 
         }
-       
+
+        public List<Album> GetAlbums(int offset)
+        {
+            return  Get().Skip(offset).Take(Common.DefaultTake).ToList();
+
+        }
     }
 }

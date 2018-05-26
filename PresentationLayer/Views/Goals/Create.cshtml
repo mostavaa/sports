@@ -31,7 +31,7 @@
                     <th>
                         @Html.LabelFor(model => model.GoalPlayerName, htmlAttributes: new {@class = "control-label col-md-2"})
                     </th>
-                 
+                    <th>photo</th>
 
                 </tr>
                 </thead>
@@ -55,7 +55,14 @@
                         @Html.TextAreaFor(model => model.GoalPlayerName, new {@class = "form-control"})
                         @Html.ValidationMessageFor(model => model.GoalPlayerName, "", new {@class = "text-danger"})
                     </td>
-                   
+                    <td>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input required type='file' id="file" name="file" class="form-control" accept="image/*"  />
+                            </div>
+                        </div>
+
+                    </td>
                 </tr>
                 </tbody>
             </table>

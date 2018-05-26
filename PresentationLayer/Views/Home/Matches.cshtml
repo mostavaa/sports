@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using PresentationLayer.Models
+@model dynamic
 
 @{
     ViewBag.Title = "title";
@@ -12,9 +13,9 @@
             <div id="search" style="margin: 0 auto;width: 70%">
                 <div class="row mx-0 animate-box fadeInUp animated-fast" data-animate-effect="fadeInUp">
                     <div class="col-12 text-center pb-4 pt-4">
-                        <a href="#" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
-                        <a href="#" class="btn_pagging "  >{{currentPage}}</a>
-                        <a href="#" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+                        <a href="#" v-on:click="getPrevious($event)" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
+                        <a class="btn_pagging ">{{currentPage}}</a>
+                        <a href="#" v-on:click="getNext($event)" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
                     </div>
                 </div>
             </div>
@@ -24,16 +25,16 @@
                 </div>
                 <table class="table" style="text-align: center">
                     <tbody>
-                    <tr v-for="match in tournament.matches">
-                        <td>
-                            <a v-bind:href="match.link">Details</a>
-                        </td>
-                        <td>{{match.firstTeam}}</td>
-                        <td><span>{{match.firstTeamGoals}}</span>:<span>{{match.secondTeamGoals}}</span></td>
-                        <td>{{match.secondTeam}}</td>
-                        <td>{{match.date}}</td>
-                        <td><i v-if="match.isPlayed" class="fa fa-check"></i></td>
-                    </tr>
+                        <tr v-for="match in tournament.matches">
+                            <td>
+                                <a v-bind:href="match.link">Details</a>
+                            </td>
+                            <td>{{match.firstTeam}}</td>
+                            <td><span>{{match.firstTeamGoals}}</span>:<span>{{match.secondTeamGoals}}</span></td>
+                            <td>{{match.secondTeam}}</td>
+                            <td>{{match.date}}</td>
+                            <td><i v-if="match.isPlayed" class="fa fa-check"></i></td>
+                        </tr>
 
                     </tbody>
 
@@ -43,8 +44,8 @@
         </div>
     </div>
 </div>
-    @section scripts{
-        <script>
+@section scripts{
+    <script>
 
             var app = new Vue({
                 el: '#app',
@@ -113,24 +114,82 @@
                         }
                     ],
 
-
-                    currentPage: 1,
+                    previousPage:'@DateTime.Now.AddDays(-1).ToString(Common.InputDateOnlyFormat)',
+                    nextPage:'@DateTime.Now.AddDays(1).ToString(Common.InputDateOnlyFormat)',
+                    currentPage: '@DateTime.Now.ToString(Common.InputDateOnlyFormat)',
                     Previous: 'Yesterday',
                     Next: 'Tomorrow',
 
-
-
-
-                    footerLogoName: 'white_logo.png',
-                    aboutHead: 'About',
-                    about: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-
                 },
                 created: function () {
-                    //console.log(getParameterByName("test"));
+                    var url = '@Url.Action("GetMatches", "Home")?datetime=@DateTime.Now.ToString(Common.InputDateOnlyFormat)';
+                    $.ajax({
+                        url: url,
+                        data: {
+                            format: 'json'
+                        },
+                        success: function (data) {
+                            if (data.result) {
+                                app.tournaments = data.result.AllMatches;
+                            }
+                        },
+                        type: 'GET'
+                    });
+                },
+                methods: {
+                    getPrevious: function (e) {
+                        debugger;
+                        e.preventDefault();
+                        if (app.previousPage) {
+                            var url = '@Url.Action("GetMatches", "Home")?datetime=' + app.previousPage;
+                            $.ajax({
+                                url: url ,
+                                data: {
+                                    format: 'json'
+                                },
+                                success: function (data) {
+                                    debugger;
+                                    if (data.result && data.result.AllMatches && data.result.AllMatches.length > 0) {
+                                        app.tournaments = data.result.AllMatches;
+                                        app.nextPage = app.currentPage;
+                                        app.currentPage = app.previousPage;
+                                        var Pdate = new Date(app.previousPage);
+                                     Pdate.setDate(Pdate.getDate() + -1);
+                                     app.previousPage = toDateTime(Pdate);
+                                    }
+                                },
+                                type: 'GET'
+                            });
+                        }
+                    },
+                    getNext: function (e) {
+                        e.preventDefault();
+                        if (app.nextPage) {
+                            var url = '@Url.Action("GetMatches", "Home")?datetime=' + app.nextPage;
 
+                            $.ajax({
+                                url: url,
+                                data: {
+                                    format: 'json'
+                                },
+                                success: function (data) {
+                                    debugger;
+
+                                    if (data.result && data.result.AllMatches && data.result.AllMatches.length > 0) {
+                                        app.tournaments = data.result.AllMatches;
+                                        app.previousPage = app.currentPage;
+                                        app.currentPage = app.nextPage;
+                                        var Ndate = new Date(app.nextPage);
+                                        Ndate.setDate(Ndate.getDate() + 1);
+                                        app.nextPage = toDateTime(Ndate);
+                                    }
+                                },
+                                type: 'GET'
+                            });
+                        }
+                    }
                 }
             });
 
-        </script>
-    }
+    </script>
+}

@@ -40,6 +40,7 @@ namespace PresentationLayer.Controllers
                 
                 _db.Albums.Add(Album);
                 _db.SaveChanges();
+                UploadImage(Album.GUID);
                 return RedirectToAction("Index");
             }
             ViewBag.Championships = AllChampionships(selectedChampionshipId: Album.Match.ChampionshipId ?? 0);
@@ -77,6 +78,7 @@ namespace PresentationLayer.Controllers
             {
                 _db.Entry(Album).State = EntityState.Modified;
                 _db.SaveChanges();
+                UploadImage(Album.GUID);
                 return RedirectToAction("Index");
             }
             ViewBag.News = AllNews();

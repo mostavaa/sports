@@ -44,9 +44,9 @@
         </div>
         <div class="row mx-0 animate-box fadeInUp animated-fast" data-animate-effect="fadeInUp">
             <div class="col-12 text-center pb-4 pt-4">
-                <a href="#" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
-                <a href="#" class="btn_pagging "  >{{currentPage}}</a>
-                <a href="#" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+                <a href="#" v-on:click="getPrevious($event)" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
+                <a  class="btn_pagging ">{{currentPage}}</a>
+                <a href="#" v-on:click="getNext($event)" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
             </div>
         </div>
     </div>
@@ -57,8 +57,6 @@
         var app = new Vue({
             el: '#app',
             data: {
-
-
                 imagesUrl: '../../images/',
 
 
@@ -73,9 +71,9 @@
                     matches: 'مباريات'
                 },
 
-                searchQ:'',
+                searchQ: '',
 
-                searchBtn:'Search',
+                searchBtn: 'Search',
 
                 allGoals:
                 [
@@ -148,14 +146,14 @@
                         ]
                     }
                 ],
-
-
+                previousPage:0,
+                nextPage:2,
                 currentPage: 1,
                 pages: [1, 2, 3, 4, 5],
                 Previous: 'Previous',
                 Next: 'Next',
 
-
+                matchId: 0,
 
                 footerLogoName: 'white_logo.png',
                 aboutHead: 'About',
@@ -163,8 +161,77 @@
 
             },
             created:function() {
-                //console.log(getParameterByName("test"));
+                var url = '@Url.Action("GetGoals", "Home")';
+                var matchId = getParameterByName("matchId");
+                if (matchId && matchId!=0) {
 
+                    url +="?matchId="+ matchId;
+                }
+                $.ajax({
+                    url: url,
+                    data: {
+                        format: 'json',
+                    },
+                    success: function (data) {
+                        if (data.result) {
+                            app.allGoals = data.result.allGoals;
+                        }
+                    },
+                    type: 'GET'
+                });            },
+            methods: {
+                getPrevious: function (e) {
+                    e.preventDefault();
+                    if (app.previousPage) {
+                        var url = '@Url.Action("GetGoals", "Home")?page=' + app.previousPage;
+                        var matchId = getParameterByName("matchId");
+                        if (matchId && matchId!=0) {
+                            url += "&matchId=" + matchId;
+                        }
+
+                        $.ajax({
+                            url: url,
+                            data: {
+                                format: 'json',
+                            },
+                            success: function (data) {
+                                if (data.result && data.result.allGoals && data.result.allGoals.length>0 ) {
+                                    app.allGoals = data.result.allGoals;
+                                    app.nextPage = app.currentPage;
+                                    app.currentPage = app.previousPage;
+                                    app.previousPage--;
+                                }
+                            },
+                            type: 'GET'
+                        });
+                    }
+                },
+                getNext: function (e) {
+                    e.preventDefault();
+                    if (app.nextPage) {
+                        var url = '@Url.Action("GetGoals", "Home")?page=' + app.nextPage;
+                        var matchId = getParameterByName("matchId");
+                        if (matchId && matchId!=0) {
+                            url += "&matchId=" + matchId;
+                        }
+
+                        $.ajax({
+                            url: url,
+                            data: {
+                                format: 'json',
+                            },
+                            success: function (data) {
+                                if (data.result && data.result.allGoals && data.result.allGoals.length > 0) {
+                                    app.allGoals = data.result.allGoals;
+                                    app.previousPage = app.currentPage;
+                                    app.currentPage = app.nextPage;
+                                    app.nextPage++;
+                                }
+                            },
+                            type: 'GET'
+                        });
+                    }
+                }
             }
         });
 

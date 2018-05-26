@@ -1,4 +1,6 @@
-﻿using PresentationLayer.Models.dbModels;
+﻿using System.Collections.Generic;
+using System.Linq;
+using PresentationLayer.Models.dbModels;
 
 namespace PresentationLayer.Models.Repositories
 {
@@ -10,6 +12,13 @@ namespace PresentationLayer.Models.Repositories
 
         }
 
+        public List<Goal> GetGoals(int offset = 0, long MatchId = 0)
+        {
+            return MatchId > 0
+                ? Get(o => o.MatchId == MatchId).Skip(offset).Take(Common.DefaultTake).ToList()
+                : Get().Skip(offset).Take(Common.DefaultTake).ToList();
 
+
+        }
     }
 }

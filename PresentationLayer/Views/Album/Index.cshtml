@@ -28,6 +28,13 @@
         @foreach (var item in Model)
         {
             <tr>
+                <th></th>
+                <td>
+                    @{
+                        var ImageName = @item.GUID + ".png";
+                    }
+                    <a href="~/Content/Images/@ImageName"><img src="/Content/Images/Icons/@ImageName"/></a>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AlbumName)
 
@@ -39,9 +46,9 @@
                     @Html.DisplayFor(modelItem => item.Match.FirstTeamName)-@Html.DisplayFor(modelItem => item.Match.SecondTeamName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new {id = item.Id})
                 </td>
             </tr>
         }

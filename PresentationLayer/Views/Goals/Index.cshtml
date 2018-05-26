@@ -9,7 +9,7 @@
     </p>
     <table class="table">
         <tr>
-          
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Match.ChampionshipId)
             </th>
@@ -28,6 +28,12 @@
         @foreach (var item in Model) {
             <tr>
              
+                <td>
+                    @{
+                        var ImageName = @item.GUID + ".png";
+                    }
+                    <a href="~/Content/Images/@ImageName"><img src="/Content/Images/Icons/@ImageName" /></a>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Match.Championship.ChampName)
                 </td>
