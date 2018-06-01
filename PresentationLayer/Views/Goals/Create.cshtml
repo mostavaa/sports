@@ -1,15 +1,16 @@
 ﻿@using PresentationLayer.Models.dbModels
+@using PresentationLayer.Resources
 @model PresentationLayer.Models.dbModels.Goal
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Resources.Goals;
 }
 <div id="app" class="container">
 
 
 
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Goals", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 

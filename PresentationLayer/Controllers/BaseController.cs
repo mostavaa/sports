@@ -151,7 +151,7 @@ namespace PresentationLayer.Controllers
         public void UploadImage(Guid id)
         {
             var httpPostedFileBase = Request.Files[0];
-            if (httpPostedFileBase != null)
+            if (httpPostedFileBase != null && httpPostedFileBase.ContentLength>0)
                 using (var binaryReader = new BinaryReader(httpPostedFileBase.InputStream))
                 {
                     UploadImagesToServer(id, binaryReader.ReadBytes(httpPostedFileBase.ContentLength));

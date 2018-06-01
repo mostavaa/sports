@@ -76,18 +76,24 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Goal goal)
+        public ActionResult Edit(Goal Obj)
         {
+
             if (ModelState.IsValid)
             {
-                _db.Entry(goal).State = EntityState.Modified;
-                _db.SaveChanges();
-                UploadImage(goal.GUID);
+                UnitOfWork uow = new UnitOfWork();
+                Goal ObjUpdated = uow.GoalRepository.GetById(Obj.Id);
+                ObjUpdated.GoalLink = Obj.GoalLink;
+                ObjUpdated.MatchId = Obj.MatchId;
+                ObjUpdated.GoalPlayerName = Obj.GoalPlayerName;
+                uow.GoalRepository.Update(ObjUpdated);
+                uow.Save();
+                UploadImage(ObjUpdated.GUID);
                 return RedirectToAction("Index");
             }
-            ViewBag.Championships = AllChampionships(selectedChampionshipId: goal.Match.ChampionshipId ?? 0);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: Obj.Match.ChampionshipId ?? 0);
             //ViewBag.Matches = AllMatches(addNullEntry: false, selectedMatchId: goal.MatchId, ChampionshipId: goal.Match?.ChampionshipId);
-            return View(goal);
+            return View(Obj);
         }
 
         protected override void Dispose(bool disposing)

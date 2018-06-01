@@ -1,0 +1,30 @@
+﻿@using PresentationLayer.Resources
+
+@{
+    ViewBag.Title =Resources.Admin;
+    string champs = Resources.ChampsTitle;
+    string goals = Resources.Goals;
+    string gallery = Resources.Gallery;
+    string matches = Resources.matches;
+    string news = Resources.News;
+    string Attachment = Resources.Attachment;
+}
+<div id="app">
+    
+    <div>
+        <div class="fh5co_tags_all" style="padding: 100px;">
+            <a href="@Url.Action("Index" , "Championship")" class="fh5co_tagg">@champs</a>
+            <a href="@Url.Action("Index" , "News")" class="fh5co_tagg">@news</a>
+            <a href="@Url.Action("Index" , "Album")" class="fh5co_tagg">@gallery</a>
+            <a href="@Url.Action("Index" , "Attachment")" class="fh5co_tagg">@Attachment</a>
+            <a href="@Url.Action("Index" , "Goals")" class="fh5co_tagg">@goals</a>
+            <a href="@Url.Action("Index" , "Matches")" class="fh5co_tagg" >@matches</a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        
+</script>
+}

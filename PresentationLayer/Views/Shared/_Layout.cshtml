@@ -1,16 +1,17 @@
-﻿@{
-    string Ar = "العربية";
-    string En = "English";
+﻿@using PresentationLayer.Resources
+@{
+    string Ar = Resources.AR;
+    string En = Resources.En;
 
+    string SiteName = Resources.SiteName;
+    string home = Resources.Home;
+    string champs = Resources.ChampsTitle;
+    string goals = Resources.Goals;
+    string gallery = Resources.Gallery;
+    string matches = Resources.matches;
 
-    string home = "الرئيسية";
-    string champs = "دوريات وبطولات";
-    string goals = "اهداف";
-    string gallery = "البومات";
-    string matches = "مباريات";
-
-    string aboutHead = "About";
-    string about = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+    string aboutHead = Resources.AboutHead;
+    string about = Resources.About;
     string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
     string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
 }
@@ -19,7 +20,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - @SiteName</title>
 
     <link href="~/css/media_query.css" rel="stylesheet" type="text/css" />
     <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -53,7 +54,7 @@
                     <div class="col-12 col-md-9 align-self-center fh5co_mediya_right">
 
                         <div class="text-center d-inline-block">
-                            <a href="https://fb.com/fh5co" target="_blank" class="fh5co_display_table">
+                            <a href="#" target="_blank" class="fh5co_display_table">
                                 <div class="fh5co_verticle_middle">
                                     <i class="fa fa-facebook"></i>
                                 </div>
@@ -61,10 +62,10 @@
                         </div>
                         <!--<div class="d-inline-block text-center"><img src="images/country.png" alt="img" class="fh5co_country_width"/></div>-->
                         <div class="d-inline-block text-center dd_position_relative ">
-                            <select class="form-control fh5co_text_select_option">
+                            @*<select class="form-control fh5co_text_select_option">
                                 <option>@Ar </option>
                                 <option>@En </option>
-                            </select>
+                            </select>*@
                         </div>
                         <div class="clearfix"></div>
                     </div>

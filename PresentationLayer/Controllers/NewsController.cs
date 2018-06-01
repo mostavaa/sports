@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using PresentationLayer.Models;
 using PresentationLayer.Models.dbModels;
+using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
@@ -72,19 +73,26 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( News news)
+        public ActionResult Edit(News Obj)
         {
+
             if (ModelState.IsValid)
             {
-                _db.Entry(news).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                UploadImage(news.GUID);
+                UnitOfWork uow = new UnitOfWork();
+                News ObjUpdated = uow.NewsRepository.GetById(Obj.Id);
+                ObjUpdated.ChampionshipId = Obj.ChampionshipId;
+                ObjUpdated.MatchId = Obj.MatchId;
+                ObjUpdated.NewsHeading = Obj.NewsHeading;
+                ObjUpdated.NewsDescription = Obj.NewsDescription;
+                ObjUpdated.Stars = Obj.Stars;
+                uow.NewsRepository.Update(ObjUpdated);
+                uow.Save();
+                UploadImage(ObjUpdated.GUID);
                 return RedirectToAction("Index");
             }
-            ViewBag.Championships = AllChampionships(selectedChampionshipId: news.ChampionshipId ?? 0);
-            ViewBag.Matches = AllMatches(selectedMatchId: news.MatchId ?? 0);
-            return View(news);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: Obj.ChampionshipId ?? 0);
+            ViewBag.Matches = AllMatches(selectedMatchId: Obj.MatchId ?? 0);
+            return View(Obj);
         }
 
         // GET: News/Delete/5

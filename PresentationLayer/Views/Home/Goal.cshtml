@@ -1,0 +1,72 @@
+﻿@using PresentationLayer.Models
+@using PresentationLayer.Resources
+@model PresentationLayer.Models.dbModels.Goal
+@{
+    ViewBag.Title = Resources.Goals;
+
+
+}
+
+<div id="app">
+    <div>
+        <div id="fh5co-single-content" class="container-fluid pb-4 pt-4 paddding">
+
+
+            <div class="container paddding">
+                <div class="row mx-0">
+                    <div class="col-md-offset-2 col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                        <h1>@Model.GoalPlayerName</h1>
+                        <div>
+                            <iframe width="100%" src="@Model.GoalLink"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+
+    @*var app = new Vue({
+        el: '#app',
+        data: {
+            imagesUrl: '../../Content/Images/',
+            news: {
+                image: '',
+                date: '',
+                heading: '',
+                desc: ''
+            }
+        },
+        methods:
+        {
+
+        },
+        created: function () {
+            var url = '@Url.Action("GetOneNews", "Home")';
+
+            var Id = getParameterByName("id");
+            if (Id && Id!=0) {
+
+                url += "?id=" + Id;
+            }
+            $.ajax({
+                url: url,
+                data: {
+                    format: 'json'
+                },
+                success: function (data) {
+                    if (data.result) {
+                        app.news = data.result.news;
+                    }
+                },
+                type: 'GET'
+            });
+        }
+    });*@
+
+    </script>
+}

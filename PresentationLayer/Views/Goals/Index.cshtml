@@ -1,13 +1,14 @@
-﻿@model IEnumerable<PresentationLayer.Models.dbModels.Goal>
+﻿@using PresentationLayer.Resources
+@model IEnumerable<PresentationLayer.Models.dbModels.Goal>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.Goals;
 }
 <div class="container">
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <table class="table table-bordered .table-striped">
         <tr>
             <th></th>
             <th>
@@ -48,7 +49,6 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-                    @Html.ActionLink("Details", "Details", new {id = item.Id}) |
                 </td>
             </tr>
         }

@@ -1,0 +1,96 @@
+﻿@using PresentationLayer.Models
+@using PresentationLayer.Resources
+@model PresentationLayer.Models.dbModels.Album
+
+@{
+    ViewBag.Title = Resources.Gallery;
+}
+<div id="app">
+    
+    <div>
+        @*<div id="search" style="margin: 0 auto;width: 70%">
+            <form class="row" id="fh5co_contact_form">
+                <div class="col-12 py-3">
+                    <input type="text" v-model="searchQ"class="form-control fh5co_contact_text_box" placeholder="">
+                </div>
+           
+                <div class="col-12 py-3 text-center"> <a href="#" class="btn contact_btn">{{searchBtn}}</a> </div>
+            </form>
+        </div>*@
+    </div>
+<div style="padding: 20px;">
+    <div class="owl-carousel owl-theme owl-loaded owl-drag slider2" >
+
+        <div class="">
+            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1494px;">
+                @foreach (var item in Model.Attachments)
+                {
+                    <div class="owl-item active" style="width: 363.333px; margin-right: 10px;">
+                        <div class="item px-2">
+                            <div class="fh5co_hover_news_img">
+                                <div class="fh5co_news_img"><img class="image" data-id="@item.GUID" src="@("/Content/Images/Icons/"+item.GUID+".png")" alt="">
+                                </div>
+                                <div>
+                                    <a  class="d-block fh5co_small_post_heading"><span class=""></span></a>
+                                    <div class="c_g"><i class="fa fa-clock-o"></i>@item.CreatedTime.ToString(Common.DateOnlyFormat)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                }
+                   
+
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-8">
+                        <div id="partialView" style="width: 100%; margin: 0 auto;">
+                            
+                        </div>                    
+                    </div>
+                </div>
+                <img/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function() {
+            $(".image").click(function () {
+                var url = "@Url.Action("Image","Home")?id=" + $(this).attr("data-id");
+                $.ajax({
+                    url: url,
+                    
+                    success: function (data) {
+                        if (data) {
+                            $("#partialView").html(data);
+                            $("#myModal").modal("show");
+                        }
+                    },
+                    type: 'GET'
+                }); 
+               
+            });
+        });
+    </script>
+}

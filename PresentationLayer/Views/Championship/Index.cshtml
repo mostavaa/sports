@@ -1,15 +1,16 @@
 ﻿@using PresentationLayer.Models.dbModels
+@using PresentationLayer.Resources
 @model List<PresentationLayer.Models.dbModels.Championship>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.ChampsTitle;
 }
 <div class="container">
 
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <table class="table table-bordered .table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => new Championship().ChampName)
@@ -33,7 +34,6 @@
 
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>

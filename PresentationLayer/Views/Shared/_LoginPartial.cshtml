@@ -17,7 +17,7 @@
 }
 else
 {
-        <li class="nav-item @(controller=="Account" && action== "Register"?"active":"")">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class="nav-link" ,id = "registerLink" })</li>
-        <li class="nav-item @(controller=="Account" && action== "Login"?"active":"")">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link", id = "loginLink" })</li>
+        @*<li class="nav-item @(controller=="Account" && action== "Register"?"active":"")">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class="nav-link" ,id = "registerLink" })</li>
+        <li class="nav-item @(controller=="Account" && action== "Login"?"active":"")">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link", id = "loginLink" })</li>*@
     
 }

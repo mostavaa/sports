@@ -1,13 +1,14 @@
-﻿@model IEnumerable<PresentationLayer.Models.dbModels.Match>
+﻿@using PresentationLayer.Resources
+@model IEnumerable<PresentationLayer.Models.dbModels.Match>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.matches;
 }
 <div class="container">
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <table class="table table-bordered .table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ChampionshipId)

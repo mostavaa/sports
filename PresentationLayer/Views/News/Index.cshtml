@@ -1,8 +1,9 @@
 ﻿@using PresentationLayer.Models.dbModels
+@using PresentationLayer.Resources
 @model System.Collections.Generic.List<PresentationLayer.Models.dbModels.News>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = Resources.News;
 }
 
 
@@ -11,7 +12,7 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <table class="table table-bordered .table-striped">
         <tr>
             <th>
             </th>

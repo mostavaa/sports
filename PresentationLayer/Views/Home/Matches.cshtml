@@ -1,9 +1,11 @@
 ﻿@using PresentationLayer.Models
+@using PresentationLayer.Resources
 @model dynamic
 
 @{
-    ViewBag.Title = "title";
-
+    ViewBag.Title = Resources.matches;
+    var Previous = Resources.Previous;
+    var Next = Resources.next;
 }
 
 
@@ -13,9 +15,9 @@
             <div id="search" style="margin: 0 auto;width: 70%">
                 <div class="row mx-0 animate-box fadeInUp animated-fast" data-animate-effect="fadeInUp">
                     <div class="col-12 text-center pb-4 pt-4">
-                        <a href="#" v-on:click="getPrevious($event)" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; {{Previous}}</a>
+                        <a href="#" v-on:click="getPrevious($event)" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i></a>
                         <a class="btn_pagging ">{{currentPage}}</a>
-                        <a href="#" v-on:click="getNext($event)" class="btn_mange_pagging">{{Next}} <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+                        <a href="#" v-on:click="getNext($event)" class="btn_mange_pagging"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -26,9 +28,7 @@
                 <table class="table" style="text-align: center">
                     <tbody>
                         <tr v-for="match in tournament.matches">
-                            <td>
-                                <a v-bind:href="match.link">Details</a>
-                            </td>
+                            
                             <td>{{match.firstTeam}}</td>
                             <td><span>{{match.firstTeamGoals}}</span>:<span>{{match.secondTeamGoals}}</span></td>
                             <td>{{match.secondTeam}}</td>

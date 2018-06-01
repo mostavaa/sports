@@ -1,16 +1,17 @@
 ﻿@using PresentationLayer.Models.dbModels
+@using PresentationLayer.Resources
 @model PresentationLayer.Models.dbModels.Album
 
 @{
-    ViewBag.Title = "title";
-}
+    ViewBag.Title = Resources.Gallery;
+    }
 
 <div id="app" class="container">
 
 
 
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 

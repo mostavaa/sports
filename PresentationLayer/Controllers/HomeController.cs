@@ -35,7 +35,51 @@ namespace PresentationLayer.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Adminstration")]
+        public ActionResult Admin()
+        {
+            return View();
+        }
+        public PartialViewResult Image(Guid id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Attachment attachment = uow.AttachmentRepository.Get(o=>o.GUID == id).FirstOrDefault();
+            if (attachment != null)
+            {
+                return PartialView("_Image", attachment.GUID);
+            }
+            return null;
+        }
+        public ActionResult Single(long id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            News news = uow.NewsRepository.GetById(id);
+            if (news != null)
+            {
+                return View(news);
+            }
+            return HttpNotFound();
+        }
+        public ActionResult Goal(int id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Models.dbModels.Goal goal = uow.GoalRepository.GetById(id);
+            if (goal != null)
+            {
+                return View(goal);
+            }
+            return HttpNotFound();
+        }
+        public ActionResult Album(int id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            Models.dbModels.Album album = uow.AlbumRepository.GetById(id);
+            if (album != null)
+            {
+                return View(album);
+            }
+            return HttpNotFound();
+        }
         #region Services
         //first 5 news//
         //most 5 popular//
@@ -72,7 +116,7 @@ namespace PresentationLayer.Controllers
                     date = news.CreatedTime.ToString(Common.DateFormat),
                     desc = news.NewsHeading,
                     imageName = news.GUID + ".png",
-                    link = "single.html"
+                    link = news.Id.ToString()
                 });
             }
             var latestNews = new List<object>();
@@ -87,7 +131,7 @@ namespace PresentationLayer.Controllers
                         date = news.CreatedTime.ToString(Common.DateFormat),
                         desc = news.NewsHeading,
                         imageName = news.GUID + ".png",
-                        link = "single.html"
+                        link  = news.Id.ToString()
                     });
                 }
                     latestNews.Add(new
@@ -105,7 +149,7 @@ namespace PresentationLayer.Controllers
                     date = news.CreatedTime.ToString(Common.DateFormat),
                     desc = news.NewsHeading,
                     imageName = news.GUID + ".png",
-                    link = "single.html"
+                    link = news.Id.ToString()
                 });
             }
 
@@ -117,7 +161,7 @@ namespace PresentationLayer.Controllers
                     date = news.CreatedTime.ToString(Common.DateFormat),
                     desc = news.NewsHeading,
                     imageName = news.GUID + ".png",
-                    link = "single.html"
+                    link = news.Id.ToString()
                 });
             }
             
@@ -149,7 +193,7 @@ namespace PresentationLayer.Controllers
                     date = news.CreatedTime.ToString(Common.DateFormat),
                     desc = news.NewsHeading,
                     imageName = news.GUID + ".png",
-                    link = "single.html"
+                    link = news.Id.ToString()
                 });
             }
             var result = new
@@ -177,7 +221,7 @@ namespace PresentationLayer.Controllers
                     date = goal.CreatedTime.ToString(Common.DateFormat),
                     desc = goal.GoalPlayerName,
                     imageName = goal.GUID + ".png",
-                    link = "single.html"
+                    link = goal.Id.ToString()
                 };
                 if (GoalMatches.ContainsKey(goal.Match))
                 {
@@ -232,7 +276,7 @@ namespace PresentationLayer.Controllers
                     date = album.CreatedTime.ToString(Common.DateFormat),
                     desc = album.AlbumName,
                     imageName = album.GUID + ".png",
-                    link = "single.html"
+                    link = album.Id.ToString()
                 });
             }
             var result = new
@@ -255,7 +299,7 @@ namespace PresentationLayer.Controllers
             {
                 var matchVm = new MatchVM()
                 {
-                    link= "single.html",
+                    link= match.Id.ToString(),
                     firstTeam= match.FirstTeamName,
                     secondTeam= match.SecondTeamName,
                     firstTeamGoals= match.FirstTeamName.ToString() ,
@@ -321,5 +365,8 @@ namespace PresentationLayer.Controllers
                 result
             });
         }
+
+
+      
     }
 }

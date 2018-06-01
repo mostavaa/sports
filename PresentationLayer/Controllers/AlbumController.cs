@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Mvc;
 using PresentationLayer.Models;
 using PresentationLayer.Models.dbModels;
+using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
@@ -72,18 +73,24 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Album Album)
+        public ActionResult Edit( Album Obj)
         {
+            
             if (ModelState.IsValid)
             {
-                _db.Entry(Album).State = EntityState.Modified;
-                _db.SaveChanges();
-                UploadImage(Album.GUID);
+                UnitOfWork uow = new UnitOfWork();
+                Album ObjUpdated =  uow.AlbumRepository.GetById(Obj.Id);
+                ObjUpdated.AlbumName = Obj.AlbumName;
+                ObjUpdated.MatchId = Obj.MatchId;
+                ObjUpdated.NewsId = Obj.NewsId;
+                uow.AlbumRepository.Update(ObjUpdated);
+                uow.Save();
+                UploadImage(ObjUpdated.GUID);
                 return RedirectToAction("Index");
             }
             ViewBag.News = AllNews();
-            ViewBag.Championships = AllChampionships(selectedChampionshipId: Album.Match.ChampionshipId ?? 0);
-            return View(Album);
+            ViewBag.Championships = AllChampionships(selectedChampionshipId: Obj.Match.ChampionshipId ?? 0);
+            return View(Obj);
         }
 
         // GET: Albums/Delete/5

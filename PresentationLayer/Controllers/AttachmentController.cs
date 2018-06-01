@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using PresentationLayer.Models;
 using PresentationLayer.Models.dbModels;
+using PresentationLayer.Models.Repositories;
 
 namespace PresentationLayer.Controllers
 {
@@ -66,17 +67,21 @@ namespace PresentationLayer.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Attachment attachment)
+        public ActionResult Edit(Attachment Obj)
         {
+
             if (ModelState.IsValid)
             {
-                _db.Entry(attachment).State = EntityState.Modified;
-                _db.SaveChanges();
-                UploadImage(attachment.GUID);
+                UnitOfWork uow = new UnitOfWork();
+                Attachment ObjUpdated = uow.AttachmentRepository.GetById(Obj.Id);
+                ObjUpdated.AlbumId = Obj.AlbumId;
+                uow.AttachmentRepository.Update(ObjUpdated);
+                uow.Save();
+                UploadImage(ObjUpdated.GUID);
                 return RedirectToAction("Index");
             }
-            ViewBag.Albums=AllAlbums(addNullEntry: false, selectedAlbumId: attachment.AlbumId);
-            return View(attachment);
+            ViewBag.Albums=AllAlbums(addNullEntry: false, selectedAlbumId: Obj.AlbumId);
+            return View(Obj);
         }
 
         // GET: Attachments/Delete/5
